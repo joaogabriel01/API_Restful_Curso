@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+dbdata/
 node_modules/
 build/
 temp/
