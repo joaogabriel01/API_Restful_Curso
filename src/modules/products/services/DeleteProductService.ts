@@ -1,17 +1,14 @@
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository, UsingJoinColumnIsNotAllowedError } from "typeorm";
-import Product from "../typeorm/entities/Product";
+import { getCustomRepository } from "typeorm";
 import { ProductsRepository } from "../typeorm/repositories/ProductsRepository";
 
 interface IRequest {
     id: string;
 }
 
-class ShowProductService {
-public async execute({ id }: IRequest): Promise<Product | AppError>{
-
+class DeleteProductService {
+public async execute({ id }: IRequest): Promise<void>{
         const productsRepository = getCustomRepository(ProductsRepository);
-
         
         const product = await productsRepository.findOne(id);
 
@@ -19,10 +16,9 @@ public async execute({ id }: IRequest): Promise<Product | AppError>{
             throw new AppError('Product not found');
         }
 
-
-        return product;
+        await productsRepository.remove(product);
     }
 
 }
 
-export default ShowProductService;
+export default DeleteProductService;
