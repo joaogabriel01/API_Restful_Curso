@@ -7,7 +7,7 @@ interface ITemplateVariable{
 }
 
 interface IPareseMailTemplate {
-    template: string;
+    file: string;
     variables: ITemplateVariable;
 }
 
